@@ -7,7 +7,9 @@ namespace IntroductionProjectServer
         static void Main(string[] args)
         {
             Console.Title = "IntroductionProjectServer";
-            Console.WriteLine("Hello World!");
+
+            Server.Start(5, 25565);
+            Console.ReadKey();
         }
     }
 }
