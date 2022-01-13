@@ -17,6 +17,8 @@ namespace IntroductionProjectServer
 
         private static TcpListener tcpListener;
 
+        public delegate void PacketHandler(int _fromClient, Packet _packet);
+        public static Dictionary<int, PacketHandler> packetHandlers;   
         public static void Start(int _maxPlayers, int _port)
         {
             MaxPlayers = _maxPlayers;
@@ -54,6 +56,14 @@ namespace IntroductionProjectServer
             {
                 clients.Add(i, new Client(i));
             }
+
+            packetHandlers = new Dictionary<int, PacketHandler>()
+            {
+                {(int)ClientPackets.welcomeReceived, ServerHandle.WelcomeReceived },
+                {(int)ClientPackets.messageReceived, ServerHandle.MessageReceived }
+            };
+            Console.WriteLine("Initialized packets");
+
         }
 
     }
